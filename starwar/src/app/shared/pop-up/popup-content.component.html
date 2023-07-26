@@ -1,0 +1,28 @@
+    <div class="pop-container">
+        <div class="close-wrap">
+            <button class="close-btn" mat-raised-button [mat-dialog-close]="data">X</button>
+        </div>
+        <div class="section-header">
+            <h3>Characters List</h3>
+        </div>
+        
+        <div class="row wd-100" *ngIf="characters.length>0">
+          
+            <div class="wd-33 list-container"  *ngFor="let person of characters">
+                <ul class="list-wrap">
+                    <li><span class="lable">name :</span> <span class="value">{{person.name}}</span></li>
+                    <li><span class="lable">mass :</span> <span class="value">{{person.mass}}</span></li>
+                    <li><span class="lable">height :</span> <span class="value">{{person.height}}</span></li>
+                    <li><span class="lable">skin color :</span> <span class="value">{{person.skin_color}}</span></li>
+                    <li *ngIf="person.films.length >0"><span class="lable">Films</span> </li>
+                    <ul class="inner-list" *ngIf="person.films.length >0">
+                        <li class="inner-films" *ngFor="let film of person.films">
+                           <span><mat-icon>movie</mat-icon></span> <span>  {{film}}</span> 
+                        </li>
+                    </ul>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>

@@ -1,0 +1,39 @@
+<div>
+    <div class="section-header">
+        <h2>Film List: </h2>
+    </div>
+
+    <div class="section-content">
+        <mat-table [dataSource]="dataSource" matSort multiTemplateRows *ngIf="tableData.length>0">
+            <ng-container [matColumnDef]="tableData" *ngFor="let tableData of columnName">
+                <mat-header-cell [matTooltip]="columnHeader[tableData]" matTooltipPosition="left" *matHeaderCellDef>
+                    <span  class="col-head" >
+                        {{columnHeader[tableData]}}               
+                    </span>
+                </mat-header-cell>
+                <div *ngIf="tableData.length>0">
+                    <mat-cell
+                        [matTooltip]="element[tableData]" 
+                        *matCellDef="let element; let $rowIndex = index"
+                        matTooltipPosition="left" 
+                    >
+                    <span class="col-value title" *ngIf="tableData == 'title'" (click)="filmDetails(element)">{{element[tableData]}}</span>
+                    <span class="col-value" *ngIf="tableData != 'title'">{{element[tableData]}}</span>
+                    </mat-cell>
+                </div>
+                <div *ngIf="tableData.length === 0">
+                        <span>No Record Founnd</span>
+                </div>
+            </ng-container> 
+            <mat-header-row *matHeaderRowDef="columnName"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columnName"> </mat-row>
+        </mat-table>
+        <mat-paginator  #paginator [pageSize]="6" [pageSizeOptions]="[5,10,15]" [hidden]="hidePaginator">
+
+        </mat-paginator>
+
+        <div *ngIf="tableData.length === 0">
+            <span>No Record Founnd</span>
+        </div>
+    </div>
+</div>
